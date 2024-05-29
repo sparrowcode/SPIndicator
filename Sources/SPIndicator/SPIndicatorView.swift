@@ -184,10 +184,14 @@ open class SPIndicatorView: UIView {
     
     private func setGesture() {
         if dismissByDrag {
-            let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-            addGestureRecognizer(gestureRecognizer)
-            self.gestureRecognizer = gestureRecognizer
+            self.gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+            if let gestureRecognizer = self.gestureRecognizer {
+                self.addGestureRecognizer(gestureRecognizer)
+            }
         } else {
+            if let gestureRecognizer = self.gestureRecognizer {
+                self.removeGestureRecognizer(gestureRecognizer)
+            }
             self.gestureRecognizer = nil
         }
     }
